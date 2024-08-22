@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DecimalField, SelectField, DateField
-from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange, DataRequired
+from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
+from wtforms.validators import DataRequired
 
 
 class LoginForm(FlaskForm):
@@ -9,21 +10,28 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired('Password is required')])
     submit = SubmitField("Login")
 
-class RegisterForm(FlaskForm):
-    user_name = StringField('User Name', validators=[InputRequired('User Name is required')])
-    email = StringField('Email Address', validators=[Email('Email is required'), Email('Email is not valid')])
-    contact_num = StringField('Contact Number', validators=[InputRequired('Contact number is required')])
-    address = StringField('Residential Address', validators=[InputRequired('Address is required')])
 
-    #add buyer/seller - check if it is a buyer or seller hint : Use RequiredIf field
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    group_code = StringField('Group Code', validators=[DataRequired()])
+    submit = SubmitField('Register')
 
-    #linking two fields - password should be equal to data entered in confirm
-    password = PasswordField('Password', validators=[InputRequired(),
-                  EqualTo('confirm', message='Passwords should match')])
-    confirm = PasswordField('Confirm Password', validators=[InputRequired()])
-
-    #submit button
-    submit = SubmitField("Register")
+# class RegisterForm(FlaskForm):
+#     user_name = StringField('User Name', validators=[InputRequired('User Name is required')])
+#     email = StringField('Email Address', validators=[Email('Email is required'), Email('Email is not valid')])
+#     contact_num = StringField('Contact Number', validators=[InputRequired('Contact number is required')])
+#     address = StringField('Residential Address', validators=[InputRequired('Address is required')])
+#
+#     #add buyer/seller - check if it is a buyer or seller hint : Use RequiredIf field
+#
+#     #linking two fields - password should be equal to data entered in confirm
+#     password = PasswordField('Password', validators=[InputRequired(),
+#                   EqualTo('confirm', message='Passwords should match')])
+#     confirm = PasswordField('Confirm Password', validators=[InputRequired()])
+#
+#     #submit button
+#     submit = SubmitField("Register")
 
 class ListingForm(FlaskForm):
     title = StringField('Listing Title', validators=[InputRequired('Listing title is required')], render_kw={"placeholder": "Title..."})
@@ -48,7 +56,3 @@ class ReviewForm(FlaskForm):
 class BidForm(FlaskForm):
     bid_amount = DecimalField('', validators=[InputRequired()], render_kw={"placeholder": "Bid amount..."})
     submit = SubmitField('Place Bid')
-
-class GroupForm(FlaskForm):
-    name = StringField('Group Name', validators=[DataRequired()])
-    submit = SubmitField('Create Group')

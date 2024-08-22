@@ -5,48 +5,96 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'iab207assesment3'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///auction.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///auction_dev.sqlite'
     db.init_app(app)
-
-    # Initialize Flask-Migrate
     migrate = Migrate(app, db)
-
-    # Initialize other components
-    Bootstrap(app)
-    login_manager = LoginManager()
-    login_manager.login_view = 'authentication.login'
+    bootstrap = Bootstrap(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
 
     # Import and register blueprints
-    from auction.views import mainbp
-    from auction.listings import listingbp
-    from auction.auth import authenticationbp
+    from .views import mainbp
+    from .listings import listingbp
+    from .auth import authbp
+    from .admin import adminbp
     app.register_blueprint(mainbp)
     app.register_blueprint(listingbp)
-    app.register_blueprint(authenticationbp)
+    app.register_blueprint(authbp)
+    app.register_blueprint(adminbp, url_prefix='/admin')
 
     # Error handlers
     @app.errorhandler(404)
-    def invalid_route(e):
-        return render_template('404.html')
+    def not_found_error(error):
+        return render_template('404.html'), 404
 
     @app.errorhandler(500)
-    def internal_error(e):
-        return render_template('500.html')
+    def internal_error(error):
+        return render_template('500.html'), 500
 
     return app
 
-# from flask import Flask
+@login_manager.user_loader
+def load_user(user_id):
+    from .models import User
+    return User.query.get(int(user_id))
+
+
+# from flask import Flask, Blueprint, render_template, request, session, url_for, redirect, flash
+# from flask_bootstrap import Bootstrap
 # from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
+# from flask_login import LoginManager
+# import os
 #
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///auction.sqlite'
-# db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
+# db = SQLAlchemy()
 #
-# print('Flask app is set up correctly to recognize the `db` command')
+# def create_app():
+#     print(__name__)
+#     app = Flask(__name__)
+#     app.secret_key='iab207assesment3'
+#
+#     # Set app configuration data
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///auction.sqlite'
+#     #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+#     db.init_app(app)
+#     UPLOAD_FOLDER = '/static/image'
+#     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#
+#     # Import blueprints and models
+#     from auction.views import mainbp
+#     from auction.listings import listingbp
+#     from auction.auth import authenticationbp
+#     from auction.models import User
+#
+#     # Register blueprints
+#     app.register_blueprint(mainbp)
+#     app.register_blueprint(listingbp)
+#     app.register_blueprint(authenticationbp)
+#
+#     # Initialise bootstrap
+#     bootstrap = Bootstrap(app)
+#
+#     #initialize the login manager
+#     login_manager = LoginManager()
+#     login_manager.login_view='authentication.login'
+#     login_manager.init_app(app)
+#
+#     from .models import User
+#     @login_manager.user_loader
+#     def load_user(user_id):
+#         return User.query.get(int(user_id))
+#
+#     # Error handlers
+#     @app.errorhandler(404)
+#     def invalid_route(e):
+#         return render_template('404.html')
+#
+#     @app.errorhandler(500)
+#     def internal_error(e):
+#         return render_template('500.html')
+#
+#     return app

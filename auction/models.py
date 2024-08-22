@@ -2,31 +2,31 @@ from . import db
 from datetime import datetime, date
 from flask_login import UserMixin
 
+
 class Role:
     ADMIN = 'admin'
-    ACCOUNTANT_GROUP_ADMIN = 'accountant/group admin'
+    ACCOUNTANT = 'accountant'
     USER = 'user'
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users' 
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), index=True, unique=True, nullable=False)
-    role = db.Column(db.String(50), nullable=False, default='user') #assign role
-    email_id = db.Column(db.String(100), index=True, nullable=False)
-    contact_num = db.Column(db.String(15), index=True, nullable=False)
-    address = db.Column(db.String(100), index=True, nullable=False)
+    username = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    reviews = db.relationship('Review', backref = 'user')
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    role = db.Column(db.String(50), nullable=False, default=Role.USER)
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=True)
 
 class Group(db.Model):
     __tablename__ = 'groups'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(10), nullable=False, unique=True)
-    items = db.relationship('Item', backref='group', lazy=True)
+    users = db.relationship('User', backref='group', lazy=True)
 class Listing(db.Model): 
     __tablename__ = 'listings'
     id = db.Column(db.Integer, primary_key = True)
+    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
     title = db.Column(db.String(80), nullable = False)
     starting_bid = db.Column(db.Float, nullable = False)
     current_bid = db.Column(db.Float, nullable = False)
