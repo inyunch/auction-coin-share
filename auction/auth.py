@@ -34,7 +34,12 @@ def register():
             return redirect(url_for('auth.login'))
 
         hashed_password = generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password_hash=hashed_password, group=group)
+        new_user = User(
+            username=form.username.data,
+            password_hash=hashed_password,
+            name=form.name.data,  # Use .data to get the actual string value
+            group=group
+        )
         db.session.add(new_user)
         db.session.commit()
         flash('Account created! Please login.', 'success')

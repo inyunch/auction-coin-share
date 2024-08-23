@@ -21,10 +21,12 @@ def create_app():
     from .views import mainbp
     from .listings import listingbp
     from .auth import authbp
+    from .admin import adminbp
     app.register_blueprint(mainbp)
     app.register_blueprint(listingbp)
     # app.register_blueprint(authbp)
-    app.register_blueprint(authbp, url_prefix='/auth')  # Ensure this matches the blueprint name
+    app.register_blueprint(authbp, url_prefix='/auth')
+    app.register_blueprint(adminbp, url_prefix='/admin')
 
     # Error handlers
     @app.errorhandler(404)

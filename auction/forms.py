@@ -7,7 +7,7 @@ from flask_wtf import FlaskForm
 
 
 
-class GroupForm(FlaskForm):
+class CreateGroupForm(FlaskForm):
     name = StringField('Group Name', validators=[DataRequired()])
     submit = SubmitField('Create Group')
 
@@ -23,9 +23,7 @@ class RegisterForm(FlaskForm):
     group_code = StringField('Group Code', validators=[DataRequired()])
     submit = SubmitField('Register')
 
-
 class ListingForm(FlaskForm):
-    title = StringField('Listing Title', validators=[InputRequired('Listing title is required')], render_kw={"placeholder": "Title..."})
     starting_bid = DecimalField('Starting Bid', validators=[InputRequired('Must enter a starting bid')], render_kw={"placeholder": "$"})
     brand = SelectField('Brand', choices=[('Apple', 'Apple'), ('Microsoft', 'Microsoft'), ('Dell', 'Dell'), ('HP', 'HP'), ('Lenovo', 'Lenovo'), ('Acer', 'Acer')])
     cpu = SelectField('CPU', choices=[('i3', 'i3'), ('i5', 'i5'), ('i7', 'i7'), ('Ryzen 3', 'Ryzen 3'), ('Ryzen 5', 'Ryzen 5'), ('Ryzen 7', 'Ryzen 7')])
