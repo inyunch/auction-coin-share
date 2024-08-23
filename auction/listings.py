@@ -19,46 +19,90 @@ def showlisting(id):
 
     return render_template('listings/showlisting.html', listing=listing, form=review_form_instance, bidform=bid_form_instance)
 
+
 @listingbp.route('/create', methods=['GET', 'POST'])
-@login_required #login is required for creating a listing
+@login_required
 def createlisting():
-  listingform = ListingForm()
+    listingform = ListingForm()
 
-  if listingform.validate_on_submit():
-    #Check the image file
-    db_file_path = check_upload_file(listingform)
+    if listingform.validate_on_submit():
+        # Check the image file
+        db_file_path = check_upload_file(listingform)
 
-    # Write data to database
-    listing = Listing()
-    
-    listing.title = listingform.title.data
-    listing.starting_bid = listingform.starting_bid.data
-    listing.current_bid = listingform.starting_bid.data
-    listing.total_bids = 0
-    listing.brand = listingform.brand.data
-    listing.cpu =  listingform.cpu.data
-    listing.ram_gb = listingform.ram.data
-    listing.storage_gb = listingform.storage.data
-    listing.condition = listingform.condition.data
-    listing.end_date = listingform.end_date.data
-    listing.status = 'Active'
-    listing.description = listingform.description.data
-    listing.image_url = db_file_path
-    listing.seller = current_user.name
-  
-    # Add object to db session
-    db.session.add(listing)
+        # Write data to database
+        listing = Listing(
+            group_id=current_user.group_id,  # Automatically set the group_id
+            title=listingform.title.data,
+            starting_bid=listingform.starting_bid.data,
+            current_bid=listingform.starting_bid.data,
+            total_bids=0,
+            brand=listingform.brand.data,
+            cpu=listingform.cpu.data,
+            ram_gb=listingform.ram.data,
+            storage_gb=listingform.storage.data,
+            condition=listingform.condition.data,
+            end_date=listingform.end_date.data,
+            status='Active',
+            description=listingform.description.data,
+            image_url=db_file_path,
+            seller=current_user.username
+        )
 
-    # Commit data to database
-    db.session.commit()
+        # Add object to db session
+        db.session.add(listing)
 
-    print('form is valid')
-    flash("Listing has been posted!", 'success')
-    return redirect(url_for('listing.createlisting'))
-  else:
-    print('form is not valid')
+        # Commit data to database
+        db.session.commit()
 
-  return render_template('listings/createlisting.html', form=listingform)
+        flash("Listing has been posted!", 'success')
+        return redirect(url_for('listing.createlisting'))
+    else:
+        print('form is not valid')
+
+    return render_template('listings/createlisting.html', form=listingform)
+
+# @listingbp.route('/create', methods=['GET', 'POST'])
+# @login_required #login is required for creating a listing
+# def createlisting():
+#   # Get the current user's group ID
+#   group_id = current_user.group_id
+#   listingform = ListingForm()
+#
+#   if listingform.validate_on_submit():
+#     #Check the image file
+#     db_file_path = check_upload_file(listingform)
+#
+#     # Write data to database
+#     listing = Listing()
+#     listing.group_id = group_id
+#     listing.title = listingform.title.data
+#     listing.starting_bid = listingform.starting_bid.data
+#     listing.current_bid = listingform.starting_bid.data
+#     listing.total_bids = 0
+#     listing.brand = listingform.brand.data
+#     listing.cpu =  listingform.cpu.data
+#     listing.ram_gb = listingform.ram.data
+#     listing.storage_gb = listingform.storage.data
+#     listing.condition = listingform.condition.data
+#     listing.end_date = listingform.end_date.data
+#     listing.status = 'Active'
+#     listing.description = listingform.description.data
+#     listing.image_url = db_file_path
+#     listing.seller = current_user.name
+#
+#     # Add object to db session
+#     db.session.add(listing)
+#
+#     # Commit data to database
+#     db.session.commit()
+#
+#     print('form is valid')
+#     flash("Listing has been posted!", 'success')
+#     return redirect(url_for('listing.createlisting'))
+#   else:
+#     print('form is not valid')
+#
+#   return render_template('listings/createlisting.html', form=listingform)
 
 def check_upload_file(form):
   fp = form.image_url.data
