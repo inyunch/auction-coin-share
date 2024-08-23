@@ -7,6 +7,10 @@ from flask_wtf import FlaskForm
 
 
 
+class GroupForm(FlaskForm):
+    name = StringField('Group Name', validators=[DataRequired()])
+    submit = SubmitField('Create Group')
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -18,21 +22,7 @@ class RegisterForm(FlaskForm):
     name = StringField('Game ID', validators=[DataRequired()])
     group_code = StringField('Group Code', validators=[DataRequired()])
     submit = SubmitField('Register')
-# class RegisterForm(FlaskForm):
-#     user_name = StringField('User Name', validators=[InputRequired('User Name is required')])
-#     email = StringField('Email Address', validators=[Email('Email is required'), Email('Email is not valid')])
-#     contact_num = StringField('Contact Number', validators=[InputRequired('Contact number is required')])
-#     address = StringField('Residential Address', validators=[InputRequired('Address is required')])
-#
-#     #add buyer/seller - check if it is a buyer or seller hint : Use RequiredIf field
-#
-#     #linking two fields - password should be equal to data entered in confirm
-#     password = PasswordField('Password', validators=[InputRequired(),
-#                   EqualTo('confirm', message='Passwords should match')])
-#     confirm = PasswordField('Confirm Password', validators=[InputRequired()])
-#
-#     #submit button
-#     submit = SubmitField("Register")
+
 
 class ListingForm(FlaskForm):
     title = StringField('Listing Title', validators=[InputRequired('Listing title is required')], render_kw={"placeholder": "Title..."})

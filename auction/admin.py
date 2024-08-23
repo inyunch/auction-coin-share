@@ -39,22 +39,22 @@ def create_group():
         return redirect(url_for('admin.manage_groups'))
     return render_template('create_group.html')
 
-@adminbp.route('/manage_users')
-@login_required
-def manage_users():
-    if current_user.role != Role.ADMIN:
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('main.index'))
-
-    users = User.query.all()
-    return render_template('manage_users.html', users=users)
-
-@adminbp.route('/manage_groups')
-@login_required
-def manage_groups():
-    if current_user.role != Role.ADMIN:
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('main.index'))
-
-    groups = Group.query.all()
-    return render_template('manage_groups.html', groups=groups)
+# @adminbp.route('/manage_users')
+# @login_required
+# def manage_users():
+#     if current_user.role != Role.ADMIN:
+#         flash('Unauthorized access.', 'danger')
+#         return redirect(url_for('main.index'))
+#
+#     users = User.query.all()
+#     return render_template('manage_users.html', users=users)
+#
+# @adminbp.route('/manage_groups')
+# @login_required
+# def manage_groups():
+#     if current_user.role != Role.ADMIN:
+#         flash('Unauthorized access.', 'danger')
+#         return redirect(url_for('main.index'))
+#
+#     groups = Group.query.all()
+#     return render_template('manage_groups.html', groups=groups)

@@ -4,7 +4,7 @@ from auction.models import db, User, Group, Listing, Review, WatchListItem, Bid
 
 # Create an in-memory SQLite database
 # engine = create_engine('sqlite:///:auction_dev:')
-engine = create_engine('sqlite:///auction.sqlite')
+engine = create_engine('sqlite:///auction_dev.sqlite')
 
 
 # Bind the engine to the metadata of the Base class so that

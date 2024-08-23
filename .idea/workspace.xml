@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="initial project">
+    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ add group code when register the member">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/auction_dev.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auction_dev.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/authentication/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_sql.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_sql.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,21 +47,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database_generator.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_database_connection.executor&quot;: &quot;Run&quot;,
-    &quot;Python.views.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/auction-coin-share&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.__init__.executor": "Run",
+    "Python.create_admin.executor": "Run",
+    "Python.database_generator.executor": "Run",
+    "Python.test_database_connection.executor": "Run",
+    "Python.views.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/auction-coin-share",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\auction-coin-share" />
+      <recent name="C:\Users\User\PycharmProjects\auction-coin-share\auction" />
       <recent name="C:\Users\User\PycharmProjects\auction-coin-share\auction\templates" />
     </key>
   </component>
@@ -114,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724369863341</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="+ add group code when register the member">
+      <option name="closed" value="true" />
+      <created>1724372099371</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724372099371</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,6 +141,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
     <MESSAGE value="initial project" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial project" />
+    <MESSAGE value="+ add group code when register the member" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ add group code when register the member" />
   </component>
 </project>
