@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ assign admin role">
+    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ apply css stype to create_group.html and manage_groups.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/auction_dev.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auction_dev.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/authentication/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/create_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/create_group.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +134,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724403160423</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="+ apply css stype to create_group.html and manage_groups.html">
+      <option name="closed" value="true" />
+      <created>1724442220936</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724442220936</updated>
+    </task>
+    <task id="LOCAL-00008" summary="+ apply css stype to create_group.html and manage_groups.html">
+      <option name="closed" value="true" />
+      <created>1724442236005</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724442236005</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +169,8 @@
     <MESSAGE value="initial project" />
     <MESSAGE value="+ add group code when register the member" />
     <MESSAGE value="+ assign admin role" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ assign admin role" />
+    <MESSAGE value="+ apply css stype to create_group.html and manage_groups.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ apply css stype to create_group.html and manage_groups.html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

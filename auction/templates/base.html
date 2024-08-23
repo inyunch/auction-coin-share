@@ -90,6 +90,7 @@
                   >Watch List</a
                 >
               </li>
+              {% if current_user.is_authenticated and current_user.role == 'admin' %}
               <li class="nav-item mr-lg-4 nav-item-collapse">
                 <a
                   class="navbar-link text-white"
@@ -97,10 +98,10 @@
                   >Manage Group</a
                 >
               </li>
+              {% endif %}
             </ul>
 
             <div class="ml-auto">
-              <!-- Show message and 'logout' button if user is not already logged in-->
               {% if current_user.is_authenticated %}
               <p class="text-white mr-2 welcome-msg">
                 Welcome, {{current_user.name}} 👋
@@ -110,7 +111,6 @@
                 class="btn btn-outline-light btn-sm-block btn-login"
                 >Logout</a
               >
-              <!-- Show 'login' and 'sign up' buttons if user is not already logged in-->
               {% else %}
               <a
                 href="{{url_for('auth.login')}}"
