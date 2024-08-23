@@ -99,19 +99,19 @@
                 Welcome, {{current_user.name}} 👋
               </p>
               <a
-                href="{{url_for('authentication.logout')}}"
+                href="{{url_for('auth.logout')}}"
                 class="btn btn-outline-light btn-sm-block btn-login"
                 >Logout</a
               >
               <!-- Show 'login' and 'sign up' buttons if user is not already logged in-->
               {% else %}
               <a
-                href="{{url_for('authentication.login')}}"
+                href="{{url_for('auth.login')}}"
                 class="btn btn-outline-light btn-sm-block btn-login"
                 >Login</a
               >
               <a
-                href="{{url_for('authentication.register')}}"
+                href="{{url_for('auth.register')}}"
                 class="btn btn-light btn-sm-block btn-sign-up"
                 >Sign Up</a
               >

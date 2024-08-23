@@ -3,20 +3,21 @@ from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
+
 
 
 class LoginForm(FlaskForm):
-    user_name = StringField('User Name', validators=[InputRequired('User Name is required')])
-    password = PasswordField('Password', validators=[InputRequired('Password is required')])
-    submit = SubmitField("Login")
-
-
-class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    name = StringField('Game ID', validators=[DataRequired()])
     group_code = StringField('Group Code', validators=[DataRequired()])
     submit = SubmitField('Register')
-
 # class RegisterForm(FlaskForm):
 #     user_name = StringField('User Name', validators=[InputRequired('User Name is required')])
 #     email = StringField('Email Address', validators=[Email('Email is required'), Email('Email is not valid')])

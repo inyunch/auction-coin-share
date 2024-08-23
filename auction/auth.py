@@ -1,39 +1,51 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user
 from .models import User, Group, db
-from .forms import RegistrationForm
-from werkzeug.security import generate_password_hash
+from .forms import LoginForm, RegisterForm
+from werkzeug.security import generate_password_hash, check_password_hash
 
 authbp = Blueprint('auth', __name__)
 
+@authbp.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.password_hash, form.password.data):
+            login_user(user)
+            flash('Logged in successfully.')
+            return redirect(url_for('main.index'))
+        else:
+            flash('Invalid username or password.', 'danger')
+    return render_template('authentication/login.html', form=form, heading='Login')
+
 @authbp.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
+    form = RegisterForm()
     if form.validate_on_submit():
         group = Group.query.filter_by(code=form.group_code.data).first()
         if not group:
-            flash('Invalid group code', 'danger')
+            flash('Invalid group code.', 'danger')
             return redirect(url_for('auth.register'))
+
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            flash('Username already exists.', 'danger')
+            return redirect(url_for('auth.login'))
 
         hashed_password = generate_password_hash(form.password.data)
         new_user = User(username=form.username.data, password_hash=hashed_password, group=group)
         db.session.add(new_user)
         db.session.commit()
-        flash('Registration successful', 'success')
+        flash('Account created! Please login.', 'success')
         return redirect(url_for('auth.login'))
-    return render_template('register.html', form=form)
-
-@authbp.route('/login', methods=['GET', 'POST'])
-def login():
-    # Implement login logic
-    pass
+    return render_template('authentication/register.html', form=form, heading='Register')
 
 @authbp.route('/logout')
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash("You have successfully logged out!", 'success')
     return redirect(url_for('auth.login'))
-
 
 
 # from flask import Blueprint, session, redirect, url_for, render_template, flash
