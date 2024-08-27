@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main">
+  <div class="container jumbotron mt-4 pt-3 pb-3">
+    <div class="row align-items-center">
+      <div class="col-md-8 text-center text-md-left">
+        <h1 class="responsive-heading">Manage Users</h1>
+        <p>Manage users within your group.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary mb-3">Add New User</a>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin.manage_users', group_id=user.group_id) }}">
+              <input type="hidden" name="user_id" value="{{ user.id }}">
+              <select name="role">
+                <option value="user" {% if user.role == 'user' %}selected{% endif %}>User</option>
+                <option value="accountant" {% if user.role == 'accountant' %}selected{% endif %}>Accountant</option>
+                <option value="group_admin" {% if user.role == 'group_admin' %}selected{% endif %}>Group Admin</option>
+                {% if current_user.role == 'admin' %}
+                <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                {% endif %}
+              </select>
+              <button type="submit" class="btn btn-primary">Update Role</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

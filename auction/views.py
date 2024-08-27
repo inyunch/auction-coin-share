@@ -10,7 +10,7 @@ mainbp = Blueprint('main', __name__)
 @mainbp.route('/')
 @login_required
 def index():
-    listings = Listing.query.filter_by(group_id=current_user.group_id).all()
+    listings = Listing.query.filter_by(group_id=current_user.group_id).all() # Filter listings by the current user's group_id
     return render_template('index.html', listings=listings)
 
 # @mainbp.route('/')

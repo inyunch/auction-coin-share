@@ -4,16 +4,17 @@ from flask_login import UserMixin
 
 
 class Role:
-    ADMIN = 'admin'
-    ACCOUNTANT = 'accountant'
-    USER = 'user'
+    ADMIN = 'admin'  # Website-wide admin
+    GROUP_ADMIN = 'group_admin'  # Admin within a specific group
+    ACCOUNTANT = 'accountant'  # Accountant within a group
+    USER = 'user'  # Normal user within a group
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    name = db.Column(db.String(100), unique=True, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), nullable=False, default=Role.USER)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=True)
 
@@ -23,7 +24,23 @@ class Group(db.Model):
     name = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(10), nullable=False, unique=True)
     users = db.relationship('User', backref='group', lazy=True)
-class Listing(db.Model): 
+class Boss(db.Model):
+    __tablename__ = 'bosses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+
+class Server(db.Model):
+    __tablename__ = 'servers'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+
+class Game(db.Model):
+    __tablename__ = 'games'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    servers = db.relationship('Server', backref='game', lazy=True)
+class Listing(db.Model):
     __tablename__ = 'listings'
     id = db.Column(db.Integer, primary_key = True)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))
@@ -43,9 +60,9 @@ class Listing(db.Model):
     seller = db.Column(db.String(15), nullable = False)
 
     # Relationship to call listing.reviews
-    reviews = db.relationship('Review', backref='listingreviews') 
+    reviews = db.relationship('Review', backref='listingreviews')
     # Relationship to call listing.bids
-    bids = db.relationship('Bid', backref='listingbids') 
+    bids = db.relationship('Bid', backref='listingbids')
 
     def set_review(self, review):
         self.reviews.append(review)

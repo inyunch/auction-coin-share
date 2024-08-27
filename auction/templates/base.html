@@ -90,7 +90,7 @@
                   >Watch List</a
                 >
               </li>
-              {% if current_user.is_authenticated and current_user.role == 'admin' %}
+              {% if current_user.is_authenticated and (current_user.role == 'admin' or current_user.role == 'group_admin') %}
               <li class="nav-item mr-lg-4 nav-item-collapse">
                 <a
                   class="navbar-link text-white"

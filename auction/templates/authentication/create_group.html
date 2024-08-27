@@ -15,9 +15,9 @@
 <!--      </div>-->
     </div>
   </div>
-  
+
   <div class="container">
-    
+
     <!-- Show Message when user creates a group -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -30,7 +30,7 @@
     </div>
     {% endif %}
     {% endwith %}
-    
+
     <div class="row mt-2">
       <div class="col-md-12">
         {{ wtf.quick_form(form) }}
