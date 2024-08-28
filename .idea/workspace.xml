@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ modify listing with creat item with each group">
-      <change afterPath="$PROJECT_DIR$/auction/templates/authentication/manage_users.html" afterDir="false" />
+    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ assign the role of the user and add user page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/admin.py" afterDir="false" />
@@ -13,10 +12,6 @@
       <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/create_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/create_group.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/manage_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/manage_groups.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/templates/manage_user.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -55,23 +50,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.admin.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_admin.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database_generator.executor&quot;: &quot;Run&quot;,
-    &quot;Python.forms.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_database_connection.executor&quot;: &quot;Run&quot;,
-    &quot;Python.views.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/auction-coin-share&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.__init__.executor": "Run",
+    "Python.admin.executor": "Run",
+    "Python.create_admin.executor": "Run",
+    "Python.create_database.executor": "Run",
+    "Python.database_generator.executor": "Run",
+    "Python.forms.executor": "Run",
+    "Python.test_database_connection.executor": "Run",
+    "Python.views.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/auction-coin-share",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\PycharmProjects\auction-coin-share\auction\templates\authentication" />
@@ -176,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724450424893</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="+ assign the role of the user and add user page">
+      <option name="closed" value="true" />
+      <created>1724771575183</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724771575183</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -198,6 +202,7 @@
     <MESSAGE value="+ apply css stype to create_group.html and manage_groups.html" />
     <MESSAGE value="+ add base_no_nav.html" />
     <MESSAGE value="+ modify listing with creat item with each group" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ modify listing with creat item with each group" />
+    <MESSAGE value="+ assign the role of the user and add user page" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ assign the role of the user and add user page" />
   </component>
 </project>

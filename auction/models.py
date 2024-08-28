@@ -24,8 +24,9 @@ class Group(db.Model):
     name = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(10), nullable=False, unique=True)
     users = db.relationship('User', backref='group', lazy=True)
-class Boss(db.Model):
-    __tablename__ = 'bosses'
+
+class Game(db.Model):
+    __tablename__ = 'games'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
 
@@ -35,11 +36,34 @@ class Server(db.Model):
     name = db.Column(db.String(100), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
 
-class Game(db.Model):
-    __tablename__ = 'games'
+class Boss(db.Model):
+    __tablename__ = 'bosses'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    servers = db.relationship('Server', backref='game', lazy=True)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+    category = db.Column(db.String(50), nullable=False, default='boss')  # Default category
+
+class Item(db.Model):
+    __tablename__ = 'items'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+    boss_id = db.Column(db.Integer, db.ForeignKey('bosses.id'), nullable=True)  # Optional relationship
+    category = db.Column(db.String(50), nullable=False)  # Item category
+    subcategory = db.Column(db.String(50), nullable=True)  # Optional subcategory
+    # boss = db.relationship('Boss', backref='items', lazy=True)
+
+# class Event(db.Model):
+#     __tablename__ = 'events'
+#     id = db.Column(Integer, primary_key=True)
+#     boss_id = db.Column(Integer, ForeignKey('bosses.id'), nullable=False)
+#     date = db.Column(DateTime, nullable=False)
+#     time = db.Column(DateTime, nullable=False)
+#     proof_image = db.Column(String(400), nullable=False)
+#     boss = relationship('Boss', backref='events', lazy=True)
+#     items = relationship('Item', backref='event', lazy=True)
+#     users = relationship('User', secondary=event_users, backref='events', lazy='dynamic')
+
 class Listing(db.Model):
     __tablename__ = 'listings'
     id = db.Column(db.Integer, primary_key = True)

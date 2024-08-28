@@ -99,6 +99,15 @@
                 >
               </li>
               {% endif %}
+              {% if current_user.is_authenticated and (current_user.role == 'admin') %}
+              <li class="nav-item mr-lg-4 nav-item-collapse">
+                <a
+                  class="navbar-link text-white"
+                  href="{{url_for('admin.manage_games')}}"
+                  >Manage Game</a
+                >
+              </li>
+              {% endif %}
             </ul>
 
             <div class="ml-auto">

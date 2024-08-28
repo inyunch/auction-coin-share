@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main">
+  <div class="container jumbotron mt-4 pt-3 pb-3">
+    <div class="row align-items-center">
+      <div class="col-md-8 text-center text-md-left">
+        <h1 class="responsive-heading">Manage Games</h1>
+        <p>Manage games, including bosses and items.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('admin.add_game') }}" class="btn btn-primary mb-3">Add New Game</a>
+
+    <h3>Game List</h3>
+    <ul class="list-group">
+      {% for game in games %}
+      <li class="list-group-item">
+        <strong>{{ game.name }}</strong>
+        <div class="btn-group float-right" role="group">
+          <a href="{{ url_for('admin.manage_bosses', game_id=game.id) }}" class="btn btn-secondary">Manage Bosses</a>
+          <a href="{{ url_for('admin.manage_items', game_id=game.id) }}" class="btn btn-secondary">Manage Items</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

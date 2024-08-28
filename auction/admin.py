@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from .models import User, Group, db, Role
+from .models import User, Group, db, Role, Game, Boss, Item
 from .utils import generate_group_code
-from .forms import CreateGroupForm, AddUserForm
+from .forms import CreateGroupForm, AddUserForm, GameForm, BossForm, ItemForm
 from werkzeug.security import generate_password_hash
+
 
 
 adminbp = Blueprint('admin', __name__)
@@ -105,3 +106,81 @@ def add_user():
         return redirect(url_for('admin.manage_users', group_id=group_id))
 
     return render_template('authentication/add_user.html', form=form)
+
+@adminbp.route('/manage_games', methods=['GET'])
+@login_required
+def manage_games():
+    if current_user.role != 'admin':
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('main.index'))
+
+    # Query all games
+    games = Game.query.all()
+    return render_template('game_info/manage_games.html', games=games)
+
+
+@adminbp.route('/add_game', methods=['GET', 'POST'])
+@login_required
+def add_game():
+    if current_user.role != 'admin':
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('main.index'))
+
+    form = GameForm()
+    if form.validate_on_submit():
+        new_game = Game(name=form.name.data)
+        db.session.add(new_game)
+        db.session.commit()
+        flash('Game added successfully!', 'success')
+        return redirect(url_for('admin.manage_games'))
+
+    return render_template('game_info/add_game.html', form=form)
+
+
+@adminbp.route('/manage_bosses/<int:game_id>', methods=['GET', 'POST'])
+@login_required
+def manage_bosses(game_id):
+    if current_user.role != 'admin':
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('main.index'))
+
+    game = Game.query.get_or_404(game_id)
+    bosses = Boss.query.filter_by(game_id=game.id).all()
+
+    form = BossForm()
+    if form.validate_on_submit():
+        new_boss = Boss(name=form.name.data, category=form.category.data, game_id=game_id)
+        db.session.add(new_boss)
+        db.session.commit()
+        flash('Boss added successfully!', 'success')
+        return redirect(url_for('admin.manage_bosses', game_id=game_id))
+
+    return render_template('game_info/manage_bosses.html', game=game, bosses=bosses, form=form)
+
+@adminbp.route('/manage_items/<int:game_id>', methods=['GET', 'POST'])
+@login_required
+def manage_items(game_id):
+    if current_user.role != 'admin':
+        flash('Unauthorized access.', 'danger')
+        return redirect(url_for('main.index'))
+
+    game = Game.query.get_or_404(game_id)
+    items = Item.query.filter_by(game_id=game.id).all()
+
+    form = ItemForm()
+    # form.boss.choices = [(boss.id, boss.name) for boss in Boss.query.filter_by(game_id=game_id).all()]
+
+    if form.validate_on_submit():
+        new_item = Item(
+            name=form.name.data,
+            category=form.category.data,
+            subcategory=form.subcategory.data,
+            game_id=game_id,
+            # boss_id=form.boss.data if form.boss.data else None
+        )
+        db.session.add(new_item)
+        db.session.commit()
+        flash('Item added successfully!', 'success')
+        return redirect(url_for('admin.manage_items', game_id=game_id))
+
+    return render_template('game_info/manage_items.html', game=game, items=items, form=form)

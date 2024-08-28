@@ -28,6 +28,20 @@ class RegisterForm(FlaskForm):
     group_code = StringField('Group Code', validators=[DataRequired()])
     submit = SubmitField('Register')
 
+class GameForm(FlaskForm):
+    name = StringField('Game Name', validators=[DataRequired()])
+    submit = SubmitField('Add Game')
+
+class BossForm(FlaskForm):
+    name = StringField('Boss Name', validators=[DataRequired()])
+    category = SelectField('Category', choices=[('world boss', 'World Boss'), ('boss', 'Boss'), ('special', 'Special'), ('other', 'Other')], validators=[DataRequired()])
+    submit = SubmitField('Add Boss')
+class ItemForm(FlaskForm):
+    name = StringField('Item Name', validators=[DataRequired()])
+    category = SelectField('Category', choices=[('weapon', 'Weapon'), ('armor', 'Armor')], validators=[DataRequired()])
+    subcategory = StringField('Subcategory')
+    # boss = SelectField('Boss', coerce=int, choices=[], validators=[DataRequired()])
+    submit = SubmitField('Add Item')
 
 class ListingForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired('Title is required')])
