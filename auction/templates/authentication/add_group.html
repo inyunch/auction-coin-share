@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main">
+  <div class="container jumbotron mt-4 pt-3 pb-3">
+    <div class="row align-items-center">
+      <div class="col-md-8 text-center text-md-left">
+        <h1 class="responsive-heading">Add Group</h1>
+        <p>Enter the details to add a new group.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class="form-control") }}
+      </div>
+      <div class="form-group">
+        {{ form.game.label }}
+        {{ form.game(class="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-primary">{{ form.submit() }}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
