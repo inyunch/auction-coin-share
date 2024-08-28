@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ assign the role of the user and add user page">
+    <list default="true" id="bf5e5293-5c6a-48fd-a77f-742b22bc88d1" name="Changes" comment="+ add manage boss/game/item">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/auction_dev.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auction_dev.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/decorators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/authentication/add_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/add_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/authentication/create_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/add_group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auction/templates/authentication/manage_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/authentication/manage_groups.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/auction/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724771575183</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="+ add manage boss/game/item">
+      <option name="closed" value="true" />
+      <created>1724850465398</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724850465398</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,6 +215,7 @@
     <MESSAGE value="+ add base_no_nav.html" />
     <MESSAGE value="+ modify listing with creat item with each group" />
     <MESSAGE value="+ assign the role of the user and add user page" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ assign the role of the user and add user page" />
+    <MESSAGE value="+ add manage boss/game/item" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ add manage boss/game/item" />
   </component>
 </project>

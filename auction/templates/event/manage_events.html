@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main">
+  <div class="container jumbotron mt-4 pt-3 pb-3">
+    <div class="row align-items-center">
+      <div class="col-md-8 text-center text-md-left">
+        <h1 class="responsive-heading">Manage Events</h1>
+        <p>View and manage all events.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('event.create_event') }}" class="btn btn-primary mb-3">Add New Event</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Boss</th>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+        <tr>
+          <td>{{ event.boss.name }}</td>
+          <td>{{ event.datetime.strftime('%Y-%m-%d') }}</td>
+          <td>
+            <ul>
+              {% for item in event.items %}
+              <li>{{ item.name }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+          <td>
+            <a href="{{ url_for('event.show_event_details', event_id=event.id) }}" class="btn btn-secondary">Show Details</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

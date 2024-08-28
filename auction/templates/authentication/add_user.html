@@ -5,7 +5,7 @@
     <div class="row align-items-center">
       <div class="col-md-8 text-center text-md-left">
         <h1 class="responsive-heading">Add User</h1>
-        <p>Enter the details to add a new user to your group.</p>
+        <p>Enter the details to add a new user.</p>
       </div>
     </div>
   </div>
@@ -37,6 +37,12 @@
         {{ form.name.label }}
         {{ form.name(class="form-control") }}
       </div>
+      {% if form.group_id %}
+      <div class="form-group">
+        {{ form.group_id.label }}
+        {{ form.group_id(class="form-control") }}
+      </div>
+      {% endif %}
       <button type="submit" class="btn btn-primary">{{ form.submit() }}</button>
     </form>
   </div>

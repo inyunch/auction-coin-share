@@ -12,7 +12,7 @@
 
   <div class="container">
     {% if current_user.role == 'admin' %}
-    <a href="{{ url_for('admin.create_group') }}" class="btn btn-primary mb-3">Create New Group</a>
+    <a href="{{ url_for('admin.add_group') }}" class="btn btn-primary mb-3">Create New Group</a>
     {% endif %}
     <table class="table">
       <thead>

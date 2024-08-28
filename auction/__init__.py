@@ -22,10 +22,10 @@ def create_app():
     from .listings import listingbp
     from .auth import authbp
     from .admin import adminbp
-    # from .event import eventbp
+    from .event import eventbp
     app.register_blueprint(mainbp)
     app.register_blueprint(listingbp, url_prefix='/listing')
-    # app.register_blueprint(eventbp, url_prefix='/event')
+    app.register_blueprint(eventbp, url_prefix='/event')
     app.register_blueprint(authbp, url_prefix='/auth')
     app.register_blueprint(adminbp, url_prefix='/admin')
 

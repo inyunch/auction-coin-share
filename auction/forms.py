@@ -1,16 +1,24 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DecimalField, SelectField, DateField
+from wtforms.fields import TextAreaField,SubmitField, SelectMultipleField, StringField, PasswordField, IntegerField, DecimalField, SelectField, DateField, TimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 
 
-
-class CreateGroupForm(FlaskForm):
+class GroupForm(FlaskForm):
     name = StringField('Group Name', validators=[DataRequired()])
-    submit = SubmitField('Create Group')
-class AddUserForm(FlaskForm):
+    game = SelectField('Game', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Add Group')
+
+class AdminAddUserForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
+    group_id = SelectField('Group', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Add User')
+
+class GroupAdminAddUserForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()])
@@ -42,6 +50,18 @@ class ItemForm(FlaskForm):
     subcategory = StringField('Subcategory')
     # boss = SelectField('Boss', coerce=int, choices=[], validators=[DataRequired()])
     submit = SubmitField('Add Item')
+
+class EventForm(FlaskForm):
+    boss = SelectField('Boss', coerce=int, validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
+    time = TimeField('Time', validators=[DataRequired()])
+    items = SelectMultipleField('Items', coerce=int, validators=[DataRequired()])  # Use SelectMultipleField
+    owner = SelectField('Owner', coerce=int, validators=[DataRequired()])
+    users = SelectMultipleField('Joining Users', coerce=int, validators=[DataRequired()])  # Use SelectMultipleField
+    proof_image = FileField('Proof Image', validators=[
+        FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
+    submit = SubmitField('Create Event')
 
 class ListingForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired('Title is required')])

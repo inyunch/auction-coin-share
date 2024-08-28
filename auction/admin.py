@@ -2,32 +2,34 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .models import User, Group, db, Role, Game, Boss, Item
 from .utils import generate_group_code
-from .forms import CreateGroupForm, AddUserForm, GameForm, BossForm, ItemForm
+from .forms import GroupForm, AdminAddUserForm, GroupAdminAddUserForm, GameForm, BossForm, ItemForm
+from .decorators import role_required
 from werkzeug.security import generate_password_hash
+from wtforms.fields import SelectField
+from wtforms.validators import DataRequired
 
 
 
 adminbp = Blueprint('admin', __name__)
 
-@adminbp.route('/create_group', methods=['GET', 'POST'])
+@adminbp.route('/add_group', methods=['GET', 'POST'])
 @login_required
-def create_group():
-    if current_user.role != Role.ADMIN:
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('main.index'))
-
-    form = CreateGroupForm()  # Create an instance of the form
+def add_group():
+    form = GroupForm()
+    form.game.choices = [(game.id, game.name) for game in Game.query.all()]
 
     if form.validate_on_submit():
-        name = form.name.data
-        code = generate_group_code()
-        new_group = Group(name=name, code=code)
+        new_group = Group(
+            name=form.name.data,
+            code=generate_group_code(),  # Automatically generate the group code
+            game_id=form.game.data
+        )
         db.session.add(new_group)
         db.session.commit()
-        flash(f'Group {name} created with code {code}', 'success')
+        flash('Group added successfully!', 'success')
         return redirect(url_for('admin.manage_groups'))
 
-    return render_template('authentication/create_group.html', form=form)  # Pass the form to the template
+    return render_template('authentication/add_group.html', form=form)
 
 @adminbp.route('/manage_groups', methods=['GET'])
 @login_required
@@ -70,21 +72,26 @@ def manage_users(group_id):
 
     return render_template('authentication/manage_users.html', users=users)
 
-
 @adminbp.route('/add_user', methods=['GET', 'POST'])
 @login_required
+@role_required('group_admin', 'admin')
 def add_user():
-    # Ensure that only group admins can access this page
-    if current_user.role != 'group_admin':
-        flash('Unauthorized access.', 'danger')
-        return redirect(url_for('main.index'))
+    if current_user.role == 'admin':
+        form = AdminAddUserForm()
+        form.group_id.choices = [(group.id, group.name) for group in Group.query.all()]
+    else:
+        form = GroupAdminAddUserForm()
 
-    form = AddUserForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
         name = form.name.data
-        group_id = current_user.group_id  # Set group_id to the group admin's group_id
+
+        # Determine the group_id based on the role
+        if current_user.role == 'group_admin':
+            group_id = current_user.group_id
+        else:
+            group_id = form.group_id.data
 
         # Check if username already exists
         existing_user = User.query.filter_by(username=username).first()
@@ -97,12 +104,12 @@ def add_user():
             username=username,
             password_hash=generate_password_hash(password),
             name=name,
-            role='user',  # Default role
+            role='user',
             group_id=group_id
         )
         db.session.add(new_user)
         db.session.commit()
-        flash('User added successfully.', 'success')
+        flash('User added successfully!', 'success')
         return redirect(url_for('admin.manage_users', group_id=group_id))
 
     return render_template('authentication/add_user.html', form=form)
